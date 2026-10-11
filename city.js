@@ -7,7 +7,7 @@
   var assets=root.dataset.assets||'./assets';
   var reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   var menu=$('.cg-menu-button'),nav=$('.cg-mobile-nav');
-  function closeMenu(){menu.setAttribute('aria-expanded','false');nav.hidden=true;}
+  function closeMenu(){menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Открыть меню');nav.hidden=true;}
   menu.addEventListener('click',function(){var open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню');nav.hidden=!open;});
   root.addEventListener('keydown',function(e){if(e.key==='Escape'&&!nav.hidden){closeMenu();menu.focus();}});
   document.addEventListener('click',function(e){if(!nav.hidden&&!$('.cg-header').contains(e.target))closeMenu();});
