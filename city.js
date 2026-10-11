@@ -16,6 +16,18 @@
   var anchorTabs=all('[data-anchor]');
   function changeAnchor(b){anchorTabs.forEach(function(t){var on=t===b;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;$('#'+t.getAttribute('aria-controls')).hidden=!on;});}
   anchorTabs.forEach(function(b){b.addEventListener('click',function(){changeAnchor(b)});});roving(anchorTabs,changeAnchor);
+  var formatTabs=all('[data-format]'),formatImage=$('#cg-format-image'),formatAnimation;
+  function changeFormat(b){
+    formatTabs.forEach(function(t){var on=t===b;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;});
+    $('#cg-format-panel').setAttribute('aria-labelledby',b.id);
+    $('#cg-format-title').textContent=b.dataset.title;
+    $('#cg-format-inquiry').dataset.interest=b.dataset.title;
+    formatImage.alt=b.dataset.alt;
+    formatImage.src=assets+'/'+b.dataset.format+'.webp';
+    if(formatAnimation)formatAnimation.cancel();
+    if(!reduced.matches&&formatImage.animate)formatAnimation=formatImage.animate([{opacity:.5,transform:'scale(1.035)'},{opacity:1,transform:'scale(1)'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});
+  }
+  formatTabs.forEach(function(b){b.addEventListener('click',function(){changeFormat(b);});});roving(formatTabs,changeFormat);
   var cities={rostov:['Ростов-на-Дону','СИТИ','Первый интерьерный кластер на Юге России. Реконцепция 2026–2028.'],moscow:['Москва','ARTPLAY','450+ резидентов. Пример действующего интерьерного центра из презентации.'],petersburg:['Санкт-Петербург','Design District DAA','200+ шоурумов. Пример действующего интерьерного центра из презентации.'],ekaterinburg:['Екатеринбург','«Архитектор»','Интерьерный центр. Один из примеров действующего формата в презентации.']};
   all('[data-city]').forEach(function(b){b.addEventListener('click',function(){var key=b.dataset.city,data=cities[key];all('[data-city]').forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.city===key));});$('#cg-city-kicker').textContent=data[0];$('#cg-city-name').textContent=data[1];$('#cg-city-description').textContent=data[2];});});
   var floors={
@@ -26,6 +38,8 @@
   };
   var currentFloor=1,floorTabs=all('[data-floor]'),floorImage=$('#cg-floor-image');
   function changeFloor(b){currentFloor=Number(b.dataset.floor);var f=floors[currentFloor];floorTabs.forEach(function(t){var on=t===b;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;});$('#cg-floor-panel').setAttribute('aria-labelledby',b.id);$('#cg-floor-title').textContent=f.title;$('#cg-floor-description').textContent=f.description;$('#cg-floor-legend').textContent=f.legend;$('#cg-floor-color').style.background=f.color;$('#cg-floor-note-title').textContent=f.noteTitle;$('#cg-floor-note').textContent=f.note;floorImage.alt='Схема '+f.name+' из презентации';floorImage.src=assets+'/floor-'+currentFloor+'-preview.webp';all('[data-open-plan]').forEach(function(x){x.setAttribute('aria-label','Увеличить план '+f.name);});}
+  var originalChangeFloor=changeFloor;
+  changeFloor=function(b){originalChangeFloor(b);all('[data-stack]').forEach(function(layer){layer.classList.toggle('is-active',layer.dataset.stack===b.dataset.floor);});};
   floorTabs.forEach(function(b){b.addEventListener('click',function(){changeFloor(b)});});roving(floorTabs,changeFloor);
   function setInterest(text){var p=$('#cg-interest');p.hidden=false;p.textContent='Ваш интерес: '+text;$('#cg-email').href='mailto:tsgallery@yandex.ru?subject='+encodeURIComponent('Аренда в СИТИ — '+text)+'&body='+encodeURIComponent('Здравствуйте!\nИнтересует участие в интерьерном кластере СИТИ.\n'+text+'.\nПрошу рассказать об условиях и доступных площадях.\n\nКомпания: \nКонтактный телефон: ');}
   $('#cg-floor-inquiry').addEventListener('click',function(){setInterest(floors[currentFloor].title.split(' / ')[1]);});
