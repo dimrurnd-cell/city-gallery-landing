@@ -1,7 +1,7 @@
 @font-face{font-family:CityDisplay;src:url('https://cdn.jsdelivr.net/gh/dimrurnd-cell/city-gallery-landing@1f7b3dd129f51d2f1b454274a3cca80d542aaeb5/city-heading.woff2') format('woff2');font-weight:400 900;font-display:swap}
 @font-face{font-family:CityBody;src:url('https://cdn.jsdelivr.net/gh/dimrurnd-cell/city-gallery-landing@1f7b3dd129f51d2f1b454274a3cca80d542aaeb5/city-body.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:CityBody;src:url('https://cdn.jsdelivr.net/gh/dimrurnd-cell/city-gallery-landing@1f7b3dd129f51d2f1b454274a3cca80d542aaeb5/city-body-semibold.woff2') format('woff2');font-weight:600 900;font-display:swap}
-#city-gallery{--red:#e7353a;--ink:#1d1d1b;--blue:#3c546f;--mist:#e4edf3;--paper:#faf9f6;--line:#d8d9d6;--muted:#606766;background:var(--paper);color:var(--ink);font:400 15px/1.6 CityBody,sans-serif;isolation:isolate;position:relative;width:100%;text-align:left;-webkit-font-smoothing:antialiased}
+#city-gallery{--red:#d52d35;--ink:#1d1d1b;--blue:#3c546f;--mist:#e4edf3;--paper:#faf9f6;--line:#d8d9d6;--muted:#606766;background:var(--paper);color:var(--ink);font:400 15px/1.6 CityBody,sans-serif;isolation:isolate;position:relative;width:100%;text-align:left;-webkit-font-smoothing:antialiased}
 #city-gallery *,#city-gallery *:before,#city-gallery *:after{box-sizing:border-box}
 #city-gallery [hidden]{display:none!important}
 #city-gallery h1,#city-gallery h2,#city-gallery h3,#city-gallery p,#city-gallery figure,#city-gallery dl,#city-gallery dd{margin:0}
